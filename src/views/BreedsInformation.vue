@@ -16,7 +16,7 @@
 import axios from 'axios'
 import { debounce } from 'lodash.debounce'
 
-const API = ' https://api.thecatapi.com/v1/breeds/search?q='
+const API = 'https://api.thecatapi.com/v1/images/search?breed_ids='
 
 export default {
   name: 'BreedsInformation',
@@ -25,6 +25,7 @@ export default {
       breedValue: ''
     }
   },
+
   methods: {
     handleInput: debounce(function () {
       axios.get(`${API}${this.breedValue}`)

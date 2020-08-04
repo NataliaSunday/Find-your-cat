@@ -14,7 +14,7 @@
 
 <script>
 import axios from 'axios'
-import { debounce } from 'lodash.debounce'
+import { debounce } from 'vue-debounce'
 
 const API = 'https://api.thecatapi.com/v1/images/search?breed_ids='
 

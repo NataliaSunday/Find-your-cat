@@ -19,7 +19,29 @@ const routes = [
     component: function () {
       return import(/* webpackChunkName: "about" */ '../views/About.vue')
     }
+  },
+  {
+    path: '/breedsInformation',
+    name: 'BreedsInformation',
+    component: function () {
+      return import(/* webpackChunkName: "about" */ '../views/BreedsInformation.vue')
+    }
+  },
+  {
+    path: '/searchImages',
+    name: 'SearchImages',
+    component: function () {
+      return import(/* webpackChunkName: "about" */ '../views/SearchImages.vue')
+    }
+  },
+  {
+    path: '/yourFavourite',
+    name: 'YourFavourite',
+    component: function () {
+      return import(/* webpackChunkName: "about" */ '../views/YourFavourite.vue')
+    }
   }
+
 ]
 
 const router = new VueRouter({

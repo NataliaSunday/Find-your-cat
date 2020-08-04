@@ -9,6 +9,11 @@
             @input="handleInput"
             />
         </div>
+        <ul>
+            <li v-for="item in results" :key="item.id">
+                <p> {{ item.name }} </p>
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -16,13 +21,14 @@
 import axios from 'axios'
 import { debounce } from 'vue-debounce'
 
-const API = 'https://api.thecatapi.com/v1/images/search?breed_ids='
+const API = 'https://api.thecatapi.com/v1/breeds/search?q='
 
 export default {
   name: 'BreedsInformation',
   data () {
     return {
-      breedValue: ''
+      breedValue: '',
+      results: []
     }
   },
 
@@ -30,7 +36,7 @@ export default {
     handleInput: debounce(function () {
       axios.get(`${API}${this.breedValue}`)
         .then((response) => {
-          console.log(response)
+          this.results = response.data
         })
         .catch((error) => {
           console.log(error)

@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import BreedsInformation from '../views/BreedsInformation.vue'
+import SearchImages from '../views/SearchImages.vue'
+import YourFavourite from '../views/YourFavourite.vue'
 
 Vue.use(VueRouter)
 

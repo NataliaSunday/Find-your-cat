@@ -9,8 +9,8 @@
             @input="handleInput"
             />
         </div>
-        <ul>
-            <li v-for="item in results" :key="item.id">
+        <ul class="breedsInformation__resultsList">
+            <li v-for="item in results" :key="item.id" class="breedsInformation__resultsList__item">
                 <p> {{ item.name }} </p>
             </li>
         </ul>
@@ -21,21 +21,22 @@
 import axios from 'axios'
 import { debounce } from 'vue-debounce'
 
-const API = 'https://api.thecatapi.com/v1/breeds/search?q='
+const API = 'https://api.thecatapi.com/v1/'
 
 export default {
   name: 'BreedsInformation',
   data () {
     return {
       breedValue: '',
-      results: []
+      results: [] // array of obcjects and their properties (cats)
     }
   },
 
   methods: {
     handleInput: debounce(function () {
-      axios.get(`${API}${this.breedValue}`)
+      axios.get(`${API}breeds/search?q=${this.breedValue}`)
         .then((response) => {
+          console.log(response)
           this.results = response.data
         })
         .catch((error) => {
@@ -77,6 +78,17 @@ export default {
             color: #2c3e50;
             font-family: 'Noto Sans JP', sans-serif;
         }
+    }
+    &__resultsList{
+      list-style-type: none;
+      padding: 0;
+      &__item{
+        color: #EAAADD;
+        cursor: pointer;
+      }
+      &__item:nth-child(2n+0){
+        color:  #480355;
+      }
     }
 }
 </style>

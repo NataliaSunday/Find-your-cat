@@ -1,30 +1,24 @@
 <template>
     <div class="breedsInformation">
-        <div class="breedsInformation__search">
-            <label for="breedOfCats" class="breedsInformation__search__label">Search by breed:</label>
-            <input id="breedOfCats"
-            name="breedOfCats"
-            class="breedsInformation__search__input"
-            v-model="breedValue"
-            @input="handleInput"
-            />
-        </div>
-        <ul class="breedsInformation__resultsList">
-            <li v-for="item in results" :key="item.id" class="breedsInformation__resultsList__item">
-                <p> {{ item.name }} </p>
-            </li>
-        </ul>
+      <BreedsInformationSearchInput v-model="breedValue" @input="handleInput"/>
+       <BreedsInformationSearchItem v-for="item in results" :item="item" :key="item.id"/>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
 import { debounce } from 'vue-debounce'
+import BreedsInformationSearchInput from '@/components/BreedsInformationSearchInput.vue'
+import BreedsInformationSearchItem from '@/components/BreedsInformationSearchItem.vue'
 
 const API = 'https://api.thecatapi.com/v1/'
 
 export default {
   name: 'BreedsInformation',
+  components: {
+    BreedsInformationSearchInput,
+    BreedsInformationSearchItem
+  },
   data () {
     return {
       breedValue: '',
@@ -55,40 +49,5 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
-    &__search{
-        margin-top: 3em;
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-
-        &__label{
-            margin-bottom: .25em;
-            text-align: center;
-        }
-        &__input{
-            height: 2em;
-            width: 80%;
-            margin: 0 auto;
-            border-radius: 3em 3em;
-            border-color: #7699D4;
-            outline: none;
-            padding: .25em;
-            font-size: 1em;
-            color: #2c3e50;
-            font-family: 'Noto Sans JP', sans-serif;
-        }
-    }
-    &__resultsList{
-      list-style-type: none;
-      padding: 0;
-      &__item{
-        color: #EAAADD;
-        cursor: pointer;
-      }
-      &__item:nth-child(2n+0){
-        color:  #480355;
-      }
-    }
 }
 </style>

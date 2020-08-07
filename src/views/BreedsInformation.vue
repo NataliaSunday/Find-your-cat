@@ -1,11 +1,7 @@
 <template>
     <div class="breedsInformation">
       <BreedsInformationSearchInput v-model="value" @input="handleInput"/>
-        <ul class="breedsInformation__resultsList">
-            <li v-for="item in results" :key="item.id" class="breedsInformation__resultsList__item">
-                <p> {{ item.name }} </p>
-            </li>
-        </ul>
+      <BreedsInformationSearchResults v-for="item in results" :item = "item" :key="item.id" />
     </div>
 </template>
 
@@ -13,13 +9,15 @@
 import axios from 'axios'
 import { debounce } from 'vue-debounce'
 import BreedsInformationSearchInput from '@/components/BreedsInformationSearchInput.vue'
+import BreedsInformationSearchResults from '@/components/BreedsInformationSearchResults.vue'
 
 const API = 'https://api.thecatapi.com/v1/'
 
 export default {
   name: 'BreedsInformation',
   components: {
-    BreedsInformationSearchInput
+    BreedsInformationSearchInput,
+    BreedsInformationSearchResults
   },
   data () {
     return {
@@ -51,17 +49,5 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
-    &__resultsList{
-      list-style-type: none;
-      padding: 0;
-      &__item{
-        color: #EAAADD;
-        cursor: pointer;
-      }
-      &__item:nth-child(2n+0){
-        color:  #480355;
-      }
-    }
-}
+  }
 </style>

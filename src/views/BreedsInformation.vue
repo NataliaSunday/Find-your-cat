@@ -1,14 +1,6 @@
 <template>
     <div class="breedsInformation">
-        <div class="breedsInformation__search">
-            <label for="breedOfCats" class="breedsInformation__search__label">Search by breed:</label>
-            <input id="breedOfCats"
-            name="breedOfCats"
-            class="breedsInformation__search__input"
-            v-model="breedValue"
-            @input="handleInput"
-            />
-        </div>
+      <BreedsInformationSearchInput v-model="value" @input="handleInput"/>
         <ul class="breedsInformation__resultsList">
             <li v-for="item in results" :key="item.id" class="breedsInformation__resultsList__item">
                 <p> {{ item.name }} </p>
@@ -20,21 +12,25 @@
 <script>
 import axios from 'axios'
 import { debounce } from 'vue-debounce'
+import BreedsInformationSearchInput from '@/components/BreedsInformationSearchInput.vue'
 
 const API = 'https://api.thecatapi.com/v1/'
 
 export default {
   name: 'BreedsInformation',
+  components: {
+    BreedsInformationSearchInput
+  },
   data () {
     return {
-      breedValue: '',
+      value: '',
       results: [] // array of obcjects and their properties (cats)
     }
   },
 
   methods: {
     handleInput: debounce(function () {
-      axios.get(`${API}breeds/search?q=${this.breedValue}`)
+      axios.get(`${API}breeds/search?q=${this.value}`)
         .then((response) => {
           console.log(response)
           this.results = response.data
@@ -56,29 +52,6 @@ export default {
         justify-content: center;
         align-items: center;
 
-    &__search{
-        margin-top: 3em;
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-
-        &__label{
-            margin-bottom: .25em;
-            text-align: center;
-        }
-        &__input{
-            height: 2em;
-            width: 80%;
-            margin: 0 auto;
-            border-radius: 3em 3em;
-            border-color: #7699D4;
-            outline: none;
-            padding: .25em;
-            font-size: 1em;
-            color: #2c3e50;
-            font-family: 'Noto Sans JP', sans-serif;
-        }
-    }
     &__resultsList{
       list-style-type: none;
       padding: 0;

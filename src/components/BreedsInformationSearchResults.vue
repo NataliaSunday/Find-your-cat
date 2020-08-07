@@ -1,9 +1,5 @@
 <template>
-    <ul class="breedsInformation__resultsList">
-        <li class="breedsInformation__resultsList__item">
-            <p> {{ item.name }} </p>
-        </li>
-    </ul>
+    <li class="breedsInformation__resultsList__item">{{ item.name }}</li>
 </template>
 
 <script>
@@ -19,16 +15,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.breedsInformation__resultsList{
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-      &__item{
+      .breedsInformation__resultsList__item{
         color: #EAAADD;
         cursor: pointer;
+        padding: .5em;
       }
-      &__item:nth-child(2n+0){
+      .breedsInformation__resultsList__item:nth-child(2n+0){
         color:  #480355;
       }
-    }
+
 </style>

@@ -1,7 +1,9 @@
 <template>
     <div class="breedsInformation">
       <BreedsInformationSearchInput v-model="value" @input="handleInput"/>
-      <BreedsInformationSearchResults v-for="item in results" :item = "item" :key="item.id" />
+      <ul class="breedsInformation__resultsList">
+         <BreedsInformationSearchResults v-for="item in results" :item = "item" :key="item.id" />
+    </ul>
     </div>
 </template>
 
@@ -49,5 +51,11 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-  }
+
+        &__resultsList{
+          list-style-type: none;
+          padding: 0;
+          margin: 0;
+        }
+      }
 </style>
